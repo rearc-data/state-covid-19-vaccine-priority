@@ -94,7 +94,7 @@ Resources:
     Type: AWS::Events::Rule
     Properties:
       Description: "ScheduledRule"
-      ScheduleExpression: !Sub ${ScheduleCron}
+      ScheduleExpression: "cron(0 7,23 ? * * *)"
       State: "ENABLED"
       Targets:
         -
