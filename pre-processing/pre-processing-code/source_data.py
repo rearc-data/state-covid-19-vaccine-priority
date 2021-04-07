@@ -15,6 +15,7 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
+from shutil import copyfile
 
 from selenium.webdriver.chrome.options import Options
 from webdriver_manager.chrome import ChromeDriverManager
@@ -30,13 +31,15 @@ def get_default_chrome_options():
     chrome_tmp_dir = '/tmp'
     if not os.path.exists(chrome_tmp_dir):
         os.mkdir(chrome_tmp_dir)
-
+    
     chrome_options = Options()
-    # chrome_options.add_argument('--headless')
-    # chrome_options.add_argument('--no-sandbox')
-    # chrome_options.add_argument('--disable-dev-shm-usage')
-
+    print(chrome_options.capabilities['version'])
+    #chrome_options.add_argument('--headless')
+    #chrome_options.add_argument('--no-sandbox')
     chrome_options.add_argument('--no-sandbox')
+    chrome_options.add_argument('--disable-dev-shm-usage')
+
+    
     chrome_options.add_argument('--headless')
     chrome_options.add_argument('--disable-gpu')
     chrome_options.add_argument('--enable-logging')
@@ -45,14 +48,17 @@ def get_default_chrome_options():
     chrome_options.add_argument('--single-process')
     chrome_options.add_argument('--ignore-certificate-errors')
     chrome_options.add_argument(
-        'user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36')
+        'user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36')
     # chrome_options.add_argument('--window-size={}x{}'.format(1280, 1024))
     # chrome_options.add_argument('--user-data-dir={}'.format(chrome_tmp_dir + '/user-data'))
     # chrome_options.add_argument('--data-path={}'.format(chrome_tmp_dir+ '/data-path'))
     # chrome_options.add_argument('--homedir={}'.format(chrome_tmp_dir))
     # chrome_options.add_argument('--disk-cache-dir={}'.format(chrome_tmp_dir + '/cache-dir'))
 
-    # chrome_options.binary_location = os.path.join(os.getcwd(), "util/chromium")
+    chrome_options.binary_location = "tmp/chromedriver"
+    
+
+    
 
     return chrome_options 
 
@@ -82,18 +88,28 @@ def click_for_download():
         print (root)
         
         
-
+    newPath = os.path.join(os.getcwd(), "/tmp/chromedriver")
+    
     print("here")
     print(os.getcwd())
-    print(os.path.isfile('chromedriver'))
+    print(os.path.isfile(newPath))
 
+    
 
-    chromedriver_path = os.path.join(os.getcwd(), "chromedriver")
-    #print(chromedriver_path)
-
+    chromedriver_path = "/tmp/chromedriver"
+    
+    print(chromedriver_path)
+    os.chmod(newPath, 0o775)
+    copyfile(newPath, chromedriver_path)
+    #os.rename("path/to/current/file.foo", "path/to/new/destination/for/file.foo")
+    #shutil.move(os.path.join(os.getcwd(), "tmp/chromedriver"), chromedriver_path)
+    #os.replace("path/to/current/file.foo", "path/to/new/destination/for/file.foo")
+    
+    os.chmod(chromedriver_path, 0o775)
     chrome_options = get_default_chrome_options()
 
-    driver = webdriver.Chrome(executable_path = os.getcwd() + 'chromedriver', chrome_options=chrome_options) # executable_path=chromedriver_path, 
+    driver = webdriver.Chrome(executable_path = chromedriver_path, chrome_options=chrome_options) # executable_path=chromedriver_path, 
+    print(driver.capabilities['version'])
     driver.get(page_url)
     driver.find_element_by_xpath(button_xpath).click()
 
