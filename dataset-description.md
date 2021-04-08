@@ -1,0 +1,1 @@
+This dataset contains data on Covid-19 vaccine policies for state in the United States as well as the District of Columbia. The data includes information on phase prioritization, current phase, and more. Update frequency is weekly.

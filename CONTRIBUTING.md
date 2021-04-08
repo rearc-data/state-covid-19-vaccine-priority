@@ -37,14 +37,14 @@ For more details on the technologies used in our ADX products, please visit [Get
 ## How can I contribute?
 
 #### Report an Issue/Bug or Submit an Improvement/Suggestion
-If you have feedback specific to the ADX product featured in this repository, the best way to contact us would be through [opening a GitHub issue]() in this repository. Before opening an issue please review the existing suggestions to see if your idea is already there. If already present, please comment on the existing issue instead of making a new one.
+If you have feedback specific to the ADX product featured in this repository, the best way to contact us would be through [opening a GitHub issue](https://github.com/rearc-data/state-covid-19-vaccine-priority/issues) in this repository. Before opening an issue please review the existing suggestions to see if your idea is already there. If already present, please comment on the existing issue instead of making a new one.
 
 When opening an issue please **be as descriptive as possible**. If relevant please **provide information regarding your use-case, development configuration and environment**. The more specific you can be the easier it will be for us to identify and address the situation.
 
 If you have a general inquiry about Rearc's data services you can send an email to data@rearc.io. We would love to hear any suggestion, question or request you may have. 
 
 #### Pull Request
-We actively encourage you to fork, branch and open a pull request on this repository! Before opening a pull request please familiarize yourself with the [tools](#what-tools-are-you-using-throughout-your-adx-products) used in our ADX Products. If you are looking to improve the project's included datasets you should direct yourself to the [`pre-processing/pre-processing-code`](./pre-processing/pre-processing-code) folder, as this is where the gathering and transforming of data occurs.
+We actively encourage you to fork, branch and open a pull request on this repository! Before opening a pull request please familiarize yourself with the [tools](#what-tools-are-you-using-throughout-your-adx-products) used in our ADX Products. If you are looking to improve the project's included datasets you should direct yourself to the [`pre-processing/pre-processing-code`](pre-processing/pre-processing-code) folder, as this is where the gathering and transforming of data occurs.
 
 When you are ready to open a pull request, please **be as descriptive as possible** regarding all improvements you have made. After reviewing your pull request, we may ask you to complete additional changes before your pull request is accepted. If we are unable to accept your pull request, we will make sure to offer context for our decision.
 

@@ -19,17 +19,17 @@ while [[ $# -gt 0 ]]; do
   shift;
   current_arg="$1"
   case ${opt} in
-    "--source_url") export SOURCE_URL="$1"; shift;;
-    "--schedule_cron") export SCHEDULE_CRON="$1"; shift;;
+    "--source-url") export SOURCE_URL="$1"; shift;;
+    "--schedule-cron") export SCHEDULE_CRON="$1"; shift;;
     "--s3-bucket") export S3_BUCKET="$1"; shift;;
     "--dataset-name") export DATASET_NAME="$1"; shift;;
     "--product-name") export PRODUCT_NAME="$1"; shift;;
     "--product-id") export PRODUCT_ID="$1"; shift;;
     "--region") export REGION="$1"; shift;;
-    "--first_revision") export FIRST_REVISION="$1"; shift;;
-    "--products_info_file") export PRODUCTS_INFO_FILE="$1"; shift;;
-    "--product_code") export PRODUCT_CODE="$1"; shift;;
-    "--product_url") export PRODUCT_URL="$1"; shift;;
+    "--first-revision") export FIRST_REVISION="$1"; shift;;
+    "--products-info-file") export PRODUCTS_INFO_FILE="$1"; shift;;
+    "--product-code") export PRODUCT_CODE="$1"; shift;;
+    "--product-url") export PRODUCT_URL="$1"; shift;;
     "--profile") PROFILE=" --profile $1"; shift;;
     *) echo "ERROR: Invalid option: \""$opt"\"" >&2; exit 1;;
   esac
@@ -53,12 +53,22 @@ while [[ ${#PRODUCT_NAME} -gt 72 ]]; do
     esac
 done
 
+echo "creating a layer zip package, these commands may need to be adjusted depending on folder structure and dependencies"
+(if [[ -f layer.zip ]]; then rm -f layer.zip; fi && mkdir layer layer/python && \
+cp -r bin layer/. && \
+cd layer/bin && unzip -u ../../chromium.zip && \
+cd ../.. && pip3 install -r requirements.txt -t layer/python && \
+cd layer && zip -9qr layer.zip . && \
+cd .. && cp layer/layer.zip . && \
+rm -rf layer) 
+
 echo "creating a pre-processing zip package, these commands may need to be adjusted depending on folder structure and dependencies"
 (cd pre-processing/pre-processing-code && zip -r pre-processing-code.zip . -x "*.dist-info/*" -x "bin/*" -x "**/__pycache__/*")
 
 #upload pre-preprocessing.zip to s3
 echo "uploading pre-preprocessing.zip to s3"
 aws s3 cp pre-processing/pre-processing-code/pre-processing-code.zip s3://$S3_BUCKET/$DATASET_NAME/automation/pre-processing-code.zip --region "$REGION" $PROFILE
+aws s3 cp layer.zip s3://$S3_BUCKET/$DATASET_NAME/automation/SeleniumChromiumLayer.zip --region "$REGION" $PROFILE
 
 #creating dataset on ADX
 echo "creating dataset on ADX"
