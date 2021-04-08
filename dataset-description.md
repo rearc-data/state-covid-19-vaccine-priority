@@ -1,0 +1,1 @@
+This release contains data on Covid-19 policies for each state in the United States as well as the District of Columbia. The data includes information on phase prioritization, current phase, and more.
