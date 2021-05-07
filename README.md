@@ -4,7 +4,7 @@
 
 # State COVID-19 Vaccine Priority Populations | Kaiser Family Foundation (KFF)
 
-You can subscribe to the AWS Data Exchange product utilizing the automation featured in this repository by visiting [https://console.aws.amazon.com/dataexchange/home#/products/prodview-f63pydbbwkxqk](https://console.aws.amazon.com/dataexchange/home#/products/prodview-f63pydbbwkxqk).
+You can subscribe to the AWS Data Exchange product utilizing the automation featured in this repository by visiting [https://aws.amazon.com/marketplace/pp/prodview-f63pydbbwkxqk](https://aws.amazon.com/marketplace/pp/prodview-f63pydbbwkxqk).
 
 ## Main Overview
 
