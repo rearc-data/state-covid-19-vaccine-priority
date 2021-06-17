@@ -183,3 +183,6 @@ $RECYCLE.BIN/
 response.json
 run.sh
 tmp/*
+
+.idea/
+venv/
